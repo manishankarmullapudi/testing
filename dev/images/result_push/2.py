@@ -1,1 +1,1 @@
-print("result_push")
+print("hi,result_push")

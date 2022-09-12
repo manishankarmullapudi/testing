@@ -1,1 +1,25 @@
+name: octant
 
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'dev/images/octant/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'dev/images/octant/**'
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: |
+        echo "${{ secrets.DOCKERPW }}" | docker login -u "manimullapudi" --password-stdin
+        docker image build /home/runner/work/testing/testing/dev/images/octant/ -t manimullapudi/octant:dev 
+        docker push manimullapudi/octant:dev

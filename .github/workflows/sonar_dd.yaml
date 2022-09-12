@@ -1,1 +1,25 @@
+name: sonar_dd
 
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'dev/images/sonar_dd/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'dev/images/sonar_dd/**'
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: |
+        echo "${{ secrets.DOCKERPW }}" | docker login -u "manimullapudi" --password-stdin
+        docker image build /home/runner/work/testing/testing/dev/images/sonar_dd/ -t manimullapudi/sonar_dd:dev 
+        docker push manimullapudi/sonar_dd:dev

@@ -11,7 +11,6 @@ RUN rm /octant_downloader.sh
 RUN dpkg -i octant.deb
 RUN rm octant.deb
 
-
 EXPOSE 7777
 RUN mkdir /kubeconfig
 VOLUME /kubeconfig 
